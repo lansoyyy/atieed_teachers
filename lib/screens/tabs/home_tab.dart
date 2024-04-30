@@ -142,7 +142,7 @@ class HomeTab extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextWidget(
-                                    text: 'Total',
+                                    text: 'Class',
                                     fontSize: 28,
                                     color: Colors.white,
                                     fontFamily: 'Bold',
@@ -356,7 +356,7 @@ class HomeTab extends StatelessWidget {
               ),
               Center(
                 child: ButtonWidget(
-                  label: 'Check Attendance',
+                  label: 'Monitor Attendance',
                   onPressed: () {},
                 ),
               ),
@@ -391,7 +391,7 @@ class HomeTab extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Container(
                     width: double.infinity,
-                    height: 250,
+                    height: 350,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
@@ -552,18 +552,17 @@ class HomeTab extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  width: 100,
+                                  width: 75,
                                   height: 30,
                                   decoration: BoxDecoration(
                                     color: green,
-                                    border: Border.all(color: Colors.black),
                                     borderRadius: BorderRadius.circular(
-                                      20,
+                                      5,
                                     ),
                                   ),
                                   child: Center(
                                     child: TextWidget(
-                                      text: 'Tue',
+                                      text: '00',
                                       fontSize: 12,
                                       color: Colors.white,
                                       fontFamily: 'Medium',
@@ -573,19 +572,27 @@ class HomeTab extends StatelessWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
+                                TextWidget(
+                                  text: 'Present',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
+                                ),
+                                const SizedBox(
+                                  width: 50,
+                                ),
                                 Container(
-                                  width: 100,
+                                  width: 75,
                                   height: 30,
                                   decoration: BoxDecoration(
-                                    color: green,
-                                    border: Border.all(color: Colors.black),
+                                    color: red,
                                     borderRadius: BorderRadius.circular(
-                                      20,
+                                      5,
                                     ),
                                   ),
                                   child: Center(
                                     child: TextWidget(
-                                      text: 'Wed',
+                                      text: '00',
                                       fontSize: 12,
                                       color: Colors.white,
                                       fontFamily: 'Medium',
@@ -595,27 +602,105 @@ class HomeTab extends StatelessWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Container(
-                                  width: 100,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: green,
-                                    border: Border.all(color: Colors.black),
-                                    borderRadius: BorderRadius.circular(
-                                      20,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: TextWidget(
-                                      text: 'Thu',
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontFamily: 'Medium',
-                                    ),
-                                  ),
+                                TextWidget(
+                                  text: 'Absent',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
                                 ),
                               ],
                             ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 75,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(
+                                      5,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: TextWidget(
+                                      text: '00',
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                      fontFamily: 'Medium',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                TextWidget(
+                                  text: 'Late',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
+                                ),
+                                const SizedBox(
+                                  width: 75,
+                                ),
+                                Container(
+                                  width: 75,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(
+                                      5,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: TextWidget(
+                                      text: '00',
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                      fontFamily: 'Medium',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                TextWidget(
+                                  text: 'Excuse',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ButtonWidget(
+                                fontSize: 14,
+                                height: 40,
+                                width: 150,
+                                label: 'Open Record',
+                                onPressed: () {},
+                              ),
+                              ButtonWidget(
+                                color: Colors.grey,
+                                fontSize: 14,
+                                height: 40,
+                                width: 150,
+                                label: 'Download',
+                                onPressed: () {},
+                              ),
+                            ],
                           ),
                         ],
                       ),
