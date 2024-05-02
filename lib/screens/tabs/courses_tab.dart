@@ -33,7 +33,7 @@ class _CourseTabState extends State<CourseTab> {
           Row(
             children: [
               TextWidget(
-                text: 'Courses',
+                text: 'Your Courses',
                 fontSize: 24,
                 fontFamily: 'Bold',
               ),
@@ -68,90 +68,16 @@ class _CourseTabState extends State<CourseTab> {
           const SizedBox(
             height: 20,
           ),
-          TextWidget(
-            text: 'Upcoming Courses',
-            fontSize: 18,
-            fontFamily: 'Bold',
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                for (int i = 0; i < 10; i++)
-                  Padding(
-                    padding: EdgeInsets.only(left: i == 0 ? 0 : 10, right: 10),
-                    child: Container(
-                      width: 275,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: secondary),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 125,
-                            child: TextWidget(
-                              align: TextAlign.start,
-                              maxLines: 5,
-                              text:
-                                  'Contemporary Philippine Arts from the Regions',
-                              fontSize: 13,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: primary,
-                              borderRadius: BorderRadius.circular(
-                                20,
-                              ),
-                            ),
-                            child: Center(
-                              child: TextWidget(
-                                text: 'Tue',
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontFamily: 'Medium',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-              ],
+          Center(
+            child: ButtonWidget(
+              fontSize: 18,
+              width: 200,
+              label: 'Add Course',
+              onPressed: () {},
             ),
           ),
           const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextWidget(
-                  text: '1st Semester',
-                  fontSize: 22,
-                  fontFamily: 'Bold',
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.filter_list,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
+            height: 20,
           ),
           for (int i = 0; i < 3; i++)
             Padding(
@@ -297,16 +223,54 @@ class _CourseTabState extends State<CourseTab> {
           Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const CircleAvatar(
-                  minRadius: 35,
-                  maxRadius: 35,
-                  backgroundColor: Colors.grey,
-                ),
-                TextWidget(
-                  text: 'Zackary Welch',
-                  fontSize: 12,
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 200,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(
+                            20,
+                          ),
+                        ),
+                        child: Center(
+                          child: TextWidget(
+                            text: 'November 26, 2030',
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontFamily: 'Medium',
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        width: 125,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(
+                            20,
+                          ),
+                        ),
+                        child: Center(
+                          child: TextWidget(
+                            text: '10:55 am',
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontFamily: 'Medium',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
@@ -458,7 +422,7 @@ class _CourseTabState extends State<CourseTab> {
                   ),
                   child: Center(
                     child: TextWidget(
-                      text: 'In Progress',
+                      text: 'Start Class',
                       fontSize: 14,
                       color: Colors.white,
                       fontFamily: 'Medium',
@@ -467,37 +431,6 @@ class _CourseTabState extends State<CourseTab> {
                 ),
                 const SizedBox(
                   height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextWidget(
-                        text: 'Activity',
-                        fontSize: 22,
-                        fontFamily: 'Bold',
-                      ),
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(
-                            20,
-                          ),
-                        ),
-                        child: Center(
-                          child: TextWidget(
-                            text: 'November',
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontFamily: 'Medium',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
                 Container(
                   width: 200,
@@ -677,13 +610,37 @@ class _CourseTabState extends State<CourseTab> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 300,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(
+                        100,
+                      ),
+                    ),
+                    child: Center(
+                      child: TextWidget(
+                        text: 'Download Attendance Record',
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontFamily: 'Medium',
+                      ),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextWidget(
-                        text: 'History',
+                        text: 'Records',
                         fontSize: 22,
                         fontFamily: 'Bold',
                       ),
@@ -702,7 +659,7 @@ class _CourseTabState extends State<CourseTab> {
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: Container(
                       width: double.infinity,
-                      height: 250,
+                      height: 350,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
@@ -766,7 +723,7 @@ class _CourseTabState extends State<CourseTab> {
                                 IconButton(
                                   onPressed: () {},
                                   icon: const Icon(
-                                    Icons.close,
+                                    Icons.delete_outline,
                                   ),
                                 ),
                               ],
@@ -863,18 +820,17 @@ class _CourseTabState extends State<CourseTab> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    width: 100,
+                                    width: 75,
                                     height: 30,
                                     decoration: BoxDecoration(
                                       color: green,
-                                      border: Border.all(color: Colors.black),
                                       borderRadius: BorderRadius.circular(
-                                        20,
+                                        5,
                                       ),
                                     ),
                                     child: Center(
                                       child: TextWidget(
-                                        text: 'Tue',
+                                        text: '00',
                                         fontSize: 12,
                                         color: Colors.white,
                                         fontFamily: 'Medium',
@@ -884,19 +840,27 @@ class _CourseTabState extends State<CourseTab> {
                                   const SizedBox(
                                     width: 10,
                                   ),
+                                  TextWidget(
+                                    text: 'Present',
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontFamily: 'Bold',
+                                  ),
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
                                   Container(
-                                    width: 100,
+                                    width: 75,
                                     height: 30,
                                     decoration: BoxDecoration(
-                                      color: green,
-                                      border: Border.all(color: Colors.black),
+                                      color: red,
                                       borderRadius: BorderRadius.circular(
-                                        20,
+                                        5,
                                       ),
                                     ),
                                     child: Center(
                                       child: TextWidget(
-                                        text: 'Wed',
+                                        text: '00',
                                         fontSize: 12,
                                         color: Colors.white,
                                         fontFamily: 'Medium',
@@ -906,31 +870,177 @@ class _CourseTabState extends State<CourseTab> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  Container(
-                                    width: 100,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: green,
-                                      border: Border.all(color: Colors.black),
-                                      borderRadius: BorderRadius.circular(
-                                        20,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: TextWidget(
-                                        text: 'Thu',
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                        fontFamily: 'Medium',
-                                      ),
-                                    ),
+                                  TextWidget(
+                                    text: 'Absent',
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontFamily: 'Bold',
                                   ),
                                 ],
                               ),
                             ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 75,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey,
+                                      borderRadius: BorderRadius.circular(
+                                        5,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: TextWidget(
+                                        text: '00',
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontFamily: 'Medium',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  TextWidget(
+                                    text: 'Late',
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontFamily: 'Bold',
+                                  ),
+                                  const SizedBox(
+                                    width: 75,
+                                  ),
+                                  Container(
+                                    width: 75,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(
+                                        5,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: TextWidget(
+                                        text: '00',
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontFamily: 'Medium',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  TextWidget(
+                                    text: 'Excuse',
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontFamily: 'Bold',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ButtonWidget(
+                                  fontSize: 14,
+                                  height: 40,
+                                  width: 150,
+                                  label: 'Open Record',
+                                  onPressed: () {},
+                                ),
+                                ButtonWidget(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                  height: 40,
+                                  width: 150,
+                                  label: 'Download',
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
+                    ),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, top: 20, bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                        text: 'Students',
+                        fontSize: 22,
+                        fontFamily: 'Bold',
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: primary,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          ),
+                          label: TextWidget(
+                            text: 'Edit',
+                            fontSize: 14,
+                            fontFamily: 'Medium',
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                for (int i = 0; i < 5; i++)
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const CircleAvatar(
+                          minRadius: 30,
+                          maxRadius: 30,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextWidget(
+                              text: 'Surname, First Name',
+                              fontSize: 16,
+                              fontFamily: 'Bold',
+                              color: Colors.black,
+                            ),
+                            TextWidget(
+                              text: 'Grade Level          Section',
+                              fontSize: 12,
+                              fontFamily: 'Medium',
+                              color: Colors.black,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 const SizedBox(
