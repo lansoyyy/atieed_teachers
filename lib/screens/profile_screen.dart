@@ -88,7 +88,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: TextWidget(
-                      text: 'Student',
+                      text: 'Teacher',
                       fontSize: 12,
                       color: Colors.white,
                       fontFamily: 'Medium',

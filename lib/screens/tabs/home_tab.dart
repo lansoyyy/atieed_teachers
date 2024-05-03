@@ -1,5 +1,6 @@
 import 'package:atieed/screens/notif_screen.dart';
 import 'package:atieed/screens/profile_screen.dart';
+import 'package:atieed/screens/tabs/courses_pages/open_record_page.dart';
 import 'package:atieed/utlis/colors.dart';
 import 'package:atieed/widgets/button_widget.dart';
 import 'package:atieed/widgets/text_widget.dart';
@@ -690,7 +691,11 @@ class HomeTab extends StatelessWidget {
                                 height: 40,
                                 width: 150,
                                 label: 'Open Record',
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const OpenRecordPage()));
+                                },
                               ),
                               ButtonWidget(
                                 color: Colors.grey,
