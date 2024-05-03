@@ -1,4 +1,6 @@
 import 'package:atieed/screens/profile_screen.dart';
+import 'package:atieed/screens/tabs/courses_pages/class_started_page.dart';
+import 'package:atieed/screens/tabs/courses_pages/students_page.dart';
 import 'package:atieed/utlis/colors.dart';
 import 'package:atieed/widgets/button_widget.dart';
 import 'package:atieed/widgets/text_widget.dart';
@@ -411,21 +413,27 @@ class _CourseTabState extends State<CourseTab> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: 150,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: primary,
-                    borderRadius: BorderRadius.circular(
-                      15,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ClassStartedPage()));
+                  },
+                  child: Container(
+                    width: 150,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: primary,
+                      borderRadius: BorderRadius.circular(
+                        15,
+                      ),
                     ),
-                  ),
-                  child: Center(
-                    child: TextWidget(
-                      text: 'Start Class',
-                      fontSize: 14,
-                      color: Colors.white,
-                      fontFamily: 'Medium',
+                    child: Center(
+                      child: TextWidget(
+                        text: 'Start Class',
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontFamily: 'Medium',
+                      ),
                     ),
                   ),
                 ),
@@ -992,7 +1000,10 @@ class _CourseTabState extends State<CourseTab> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const StudentsPage()));
+                          },
                           icon: const Icon(
                             Icons.edit,
                             color: Colors.white,

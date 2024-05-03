@@ -1,5 +1,3 @@
-import 'package:atieed/screens/tabs/attendance_pages/gps_page.dart';
-import 'package:atieed/screens/tabs/attendance_pages/qr_page.dart';
 import 'package:atieed/screens/profile_screen.dart';
 import 'package:atieed/utlis/colors.dart';
 import 'package:atieed/widgets/text_widget.dart';
@@ -62,10 +60,7 @@ class AttendanceTab extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const GPSPage()));
-                    },
+                    onTap: () {},
                     child: Card(
                       elevation: 10,
                       child: Container(
@@ -140,10 +135,7 @@ class AttendanceTab extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const QRPage()));
-                  },
+                  onTap: () {},
                   child: Card(
                     elevation: 10,
                     child: Container(
