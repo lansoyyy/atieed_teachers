@@ -1,5 +1,7 @@
 import 'package:atieed/screens/profile_screen.dart';
+import 'package:atieed/screens/tabs/courses_pages/open_record_page.dart';
 import 'package:atieed/utlis/colors.dart';
+import 'package:atieed/widgets/button_widget.dart';
 import 'package:atieed/widgets/text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,123 +56,103 @@ class AttendanceTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 10,
-                      child: Container(
-                        width: 175,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: primary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.location_on_rounded,
-                              color: Colors.white,
-                              size: 48,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'GPS',
-                              fontSize: 22,
-                              fontFamily: 'Bold',
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 10,
-                      child: Container(
-                        width: 175,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: primary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.share_outlined,
-                              color: Colors.white,
-                              size: 48,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Nearby Share',
-                              fontSize: 22,
-                              fontFamily: 'Bold',
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              TextWidget(
+                text: 'Upcoming Courses',
+                fontSize: 24,
+                color: Colors.black,
+                fontFamily: 'Bold',
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Card(
-                    elevation: 10,
-                    child: Container(
-                      width: double.infinity,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: primary,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.qr_code,
-                            color: Colors.white,
-                            size: 48,
+              SizedBox(
+                width: 400,
+                height: 200,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (int i = 0; i < 3; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: 300,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                            color: primary,
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: TextWidget(
+                                              text: 'In Progress',
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                              fontFamily: 'Medium',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TextWidget(
+                                      text: '1st Semester',
+                                      fontSize: 12,
+                                    ),
+                                    TextWidget(
+                                      align: TextAlign.start,
+                                      maxLines: 2,
+                                      text:
+                                          'Contemporary Philippine Arts from the Regions',
+                                      fontSize: 18,
+                                      fontFamily: 'Bold',
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextWidget(
+                                          text: '12STEMA2',
+                                          fontSize: 12,
+                                        ),
+                                        TextWidget(
+                                          text:
+                                              'First Semester SY 2023-2024 (SHS)',
+                                          fontSize: 12,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextWidget(
-                            text: 'QR Code',
-                            fontSize: 22,
-                            fontFamily: 'Bold',
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                    ],
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
@@ -178,7 +160,7 @@ class AttendanceTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
-                      text: 'History',
+                      text: 'Records',
                       fontSize: 22,
                       fontFamily: 'Bold',
                     ),
@@ -192,15 +174,12 @@ class AttendanceTab extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
               for (int i = 0; i < 3; i++)
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Container(
                     width: double.infinity,
-                    height: 250,
+                    height: 350,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
@@ -361,18 +340,17 @@ class AttendanceTab extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  width: 100,
+                                  width: 75,
                                   height: 30,
                                   decoration: BoxDecoration(
                                     color: green,
-                                    border: Border.all(color: Colors.black),
                                     borderRadius: BorderRadius.circular(
-                                      20,
+                                      5,
                                     ),
                                   ),
                                   child: Center(
                                     child: TextWidget(
-                                      text: 'Tue',
+                                      text: '00',
                                       fontSize: 12,
                                       color: Colors.white,
                                       fontFamily: 'Medium',
@@ -382,19 +360,27 @@ class AttendanceTab extends StatelessWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
+                                TextWidget(
+                                  text: 'Present',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
+                                ),
+                                const SizedBox(
+                                  width: 50,
+                                ),
                                 Container(
-                                  width: 100,
+                                  width: 75,
                                   height: 30,
                                   decoration: BoxDecoration(
-                                    color: green,
-                                    border: Border.all(color: Colors.black),
+                                    color: red,
                                     borderRadius: BorderRadius.circular(
-                                      20,
+                                      5,
                                     ),
                                   ),
                                   child: Center(
                                     child: TextWidget(
-                                      text: 'Wed',
+                                      text: '00',
                                       fontSize: 12,
                                       color: Colors.white,
                                       fontFamily: 'Medium',
@@ -404,27 +390,109 @@ class AttendanceTab extends StatelessWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Container(
-                                  width: 100,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: green,
-                                    border: Border.all(color: Colors.black),
-                                    borderRadius: BorderRadius.circular(
-                                      20,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: TextWidget(
-                                      text: 'Thu',
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontFamily: 'Medium',
-                                    ),
-                                  ),
+                                TextWidget(
+                                  text: 'Absent',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
                                 ),
                               ],
                             ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 75,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(
+                                      5,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: TextWidget(
+                                      text: '00',
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                      fontFamily: 'Medium',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                TextWidget(
+                                  text: 'Late',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
+                                ),
+                                const SizedBox(
+                                  width: 75,
+                                ),
+                                Container(
+                                  width: 75,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(
+                                      5,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: TextWidget(
+                                      text: '00',
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                      fontFamily: 'Medium',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                TextWidget(
+                                  text: 'Excuse',
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontFamily: 'Bold',
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ButtonWidget(
+                                fontSize: 14,
+                                height: 40,
+                                width: 150,
+                                label: 'Open Record',
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const OpenRecordPage()));
+                                },
+                              ),
+                              ButtonWidget(
+                                color: Colors.grey,
+                                fontSize: 14,
+                                height: 40,
+                                width: 150,
+                                label: 'Download',
+                                onPressed: () {},
+                              ),
+                            ],
                           ),
                         ],
                       ),
