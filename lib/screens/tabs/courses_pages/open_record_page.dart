@@ -65,6 +65,7 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
               minRadius: 15,
               maxRadius: 15,
               backgroundColor: Colors.grey,
+              child: Icon(Icons.person),
             ),
           ],
         ),
@@ -429,6 +430,7 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                     const CircleAvatar(
                       minRadius: 25,
                       maxRadius: 25,
+                      child: Icon(Icons.person),
                     ),
                     const SizedBox(
                       width: 20,

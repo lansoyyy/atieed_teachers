@@ -3,6 +3,7 @@ import 'package:atieed/screens/profile_screen.dart';
 import 'package:atieed/screens/tabs/courses_pages/open_record_page.dart';
 import 'package:atieed/utlis/colors.dart';
 import 'package:atieed/widgets/button_widget.dart';
+import 'package:atieed/widgets/header_widget.dart';
 import 'package:atieed/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,44 +21,7 @@ class HomeTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  TextWidget(
-                    text: 'Surname, Firstname',
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                  ),
-                  const Expanded(
-                    child: SizedBox(),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const NotifScreen()));
-                    },
-                    icon: const Icon(
-                      Icons.notifications_none_rounded,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProfileScreen()));
-                    },
-                    child: const CircleAvatar(
-                      minRadius: 15,
-                      maxRadius: 15,
-                      backgroundColor: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                ],
-              ),
+              const HeaderWidget(),
               Row(
                 children: [
                   TextWidget(

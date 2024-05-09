@@ -46,6 +46,7 @@ class GeneralTab extends StatelessWidget {
                     minRadius: 15,
                     maxRadius: 15,
                     backgroundColor: Colors.grey,
+                    child: Icon(Icons.person),
                   ),
                 ),
                 const SizedBox(

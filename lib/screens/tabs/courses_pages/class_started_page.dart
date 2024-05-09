@@ -423,6 +423,7 @@ class _ClassStartedPageState extends State<ClassStartedPage> {
                             const CircleAvatar(
                               minRadius: 25,
                               maxRadius: 25,
+                              child: Icon(Icons.person),
                             ),
                             const SizedBox(
                               width: 20,

@@ -61,6 +61,7 @@ class _CourseTabState extends State<CourseTab> {
                   minRadius: 15,
                   maxRadius: 15,
                   backgroundColor: Colors.grey,
+                  child: Icon(Icons.person),
                 ),
               ),
               const SizedBox(
@@ -217,6 +218,7 @@ class _CourseTabState extends State<CourseTab> {
                 minRadius: 15,
                 maxRadius: 15,
                 backgroundColor: Colors.grey,
+                child: Icon(Icons.person),
               ),
             ],
           ),
@@ -1035,6 +1037,7 @@ class _CourseTabState extends State<CourseTab> {
                         const CircleAvatar(
                           minRadius: 30,
                           maxRadius: 30,
+                          child: Icon(Icons.person),
                         ),
                         const SizedBox(
                           width: 20,

@@ -65,6 +65,7 @@ class _StudentsPageState extends State<StudentsPage> {
               minRadius: 15,
               maxRadius: 15,
               backgroundColor: Colors.grey,
+              child: Icon(Icons.person),
             ),
           ],
         ),
@@ -117,6 +118,7 @@ class _StudentsPageState extends State<StudentsPage> {
                 const CircleAvatar(
                   minRadius: 30,
                   maxRadius: 30,
+                  child: Icon(Icons.person),
                 ),
                 const SizedBox(
                   width: 20,
