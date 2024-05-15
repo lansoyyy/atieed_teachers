@@ -1,4 +1,5 @@
 import 'package:atieed/screens/profile_screen.dart';
+import 'package:atieed/screens/tabs/courses_pages/add_course_page.dart';
 import 'package:atieed/screens/tabs/courses_pages/class_started_page.dart';
 import 'package:atieed/screens/tabs/courses_pages/open_record_page.dart';
 import 'package:atieed/screens/tabs/courses_pages/students_page.dart';
@@ -77,7 +78,10 @@ class _CourseTabState extends State<CourseTab> {
               fontSize: 18,
               width: 200,
               label: 'Add Course',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AddCoursePage()));
+              },
             ),
           ),
           const SizedBox(
