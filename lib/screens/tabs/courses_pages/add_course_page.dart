@@ -84,8 +84,6 @@ class _AddCoursePageState extends State<AddCoursePage> {
           ),
           TextFieldWidget(
             radius: 15,
-            height: 75,
-            maxLine: 3,
             borderColor: Colors.black,
             width: 300,
             controller: name,
@@ -264,8 +262,13 @@ class _AddCoursePageState extends State<AddCoursePage> {
                   width: 250,
                   label: 'Add Course',
                   onPressed: () {
-                    addCourse(name.text, section.text, _selectedOption,
-                        selectedDays, _timeFrom, _timeTo);
+                    addCourse(
+                        name.text,
+                        section.text,
+                        _selectedOption,
+                        selectedDays,
+                        _timeFrom.format(context),
+                        _timeTo.format(context));
                     showToast('Course added!');
                     Navigator.of(context).pop();
                   },

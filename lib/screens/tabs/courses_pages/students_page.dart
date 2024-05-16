@@ -2,21 +2,24 @@ import 'package:atieed/screens/profile_screen.dart';
 import 'package:atieed/utlis/colors.dart';
 import 'package:atieed/widgets/button_widget.dart';
 import 'package:atieed/widgets/text_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class StudentsPage extends StatefulWidget {
-  const StudentsPage({super.key});
+  dynamic data;
+
+  StudentsPage({
+    super.key,
+    required this.data,
+  });
 
   @override
   State<StudentsPage> createState() => _StudentsPageState();
 }
 
 class _StudentsPageState extends State<StudentsPage> {
-  final searchController = TextEditingController();
-  String nameSearched = '';
-
   bool isclicked = false;
   @override
   Widget build(BuildContext context) {
@@ -29,134 +32,183 @@ class _StudentsPageState extends State<StudentsPage> {
   }
 
   Widget courseWidget() {
-    return SingleChildScrollView(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-              ),
-            ),
-            TextWidget(
-              text: 'Students',
-              fontSize: 24,
-              fontFamily: 'Bold',
-            ),
-            const Expanded(
-              child: SizedBox(),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications_none_rounded,
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            const CircleAvatar(
-              minRadius: 15,
-              maxRadius: 15,
-              backgroundColor: Colors.grey,
-              child: Icon(Icons.person),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding:
-              const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
-          child: Container(
-            height: 40,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                ),
-                borderRadius: BorderRadius.circular(100)),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: TextFormField(
-                style: const TextStyle(
-                    color: Colors.black, fontFamily: 'Regular', fontSize: 14),
-                onChanged: (value) {
-                  setState(() {
-                    nameSearched = value;
-                  });
-                },
-                decoration: const InputDecoration(
-                    labelStyle: TextStyle(
-                      color: Colors.black,
-                    ),
-                    hintText: 'Search',
-                    hintStyle: TextStyle(fontFamily: 'Regular'),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    )),
-                controller: searchController,
-              ),
-            ),
-          ),
-        ),
-        for (int i = 0; i < 5; i++)
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const CircleAvatar(
-                  minRadius: 30,
-                  maxRadius: 30,
-                  child: Icon(Icons.person),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('Students').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+            return const Center(child: Text('Error'));
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: Center(
+                  child: CircularProgressIndicator(
+                color: Colors.black,
+              )),
+            );
+          }
+
+          final data = snapshot.requireData;
+          return StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('Courses')
+                  .doc(widget.data.id)
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: Text('Loading'));
+                } else if (snapshot.hasError) {
+                  return const Center(child: Text('Something went wrong'));
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                dynamic data111 = snapshot.data;
+                return SingleChildScrollView(
+                    child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    TextWidget(
-                      text: 'Surname, First Name',
-                      fontSize: 16,
-                      fontFamily: 'Bold',
-                      color: Colors.black,
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back,
+                          ),
+                        ),
+                        TextWidget(
+                          text: 'Students',
+                          fontSize: 24,
+                          fontFamily: 'Bold',
+                        ),
+                        const Expanded(
+                          child: SizedBox(),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.notifications_none_rounded,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const CircleAvatar(
+                          minRadius: 15,
+                          maxRadius: 15,
+                          backgroundColor: Colors.grey,
+                          child: Icon(Icons.person),
+                        ),
+                      ],
                     ),
-                    TextWidget(
-                      text: 'Grade Level          Section',
-                      fontSize: 12,
-                      fontFamily: 'Medium',
-                      color: Colors.black,
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    for (int i = 0; i < data.docs.length; i++)
+                      Builder(builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                minRadius: 30,
+                                maxRadius: 30,
+                                backgroundImage:
+                                    NetworkImage(data.docs[i]['img']),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextWidget(
+                                    text: '${data.docs[i]['name']}',
+                                    fontSize: 16,
+                                    fontFamily: 'Bold',
+                                    color: Colors.black,
+                                  ),
+                                  TextWidget(
+                                    text:
+                                        '${data.docs[i]['gradelevel']}          ${data.docs[i]['section']}',
+                                    fontSize: 12,
+                                    fontFamily: 'Medium',
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                              const Expanded(
+                                child: SizedBox(
+                                  width: 20,
+                                ),
+                              ),
+                              Builder(builder: (context) {
+                                List studs = data111['students'];
+                                print(studs);
+                                print(studs.contains(data.docs[i]['id']));
+                                return Checkbox(
+                                  value: studs.contains(data.docs[i].id)
+                                      ? true
+                                      : false,
+                                  onChanged: (value) async {
+                                    if (!studs.contains(data.docs[i].id)) {
+                                      await FirebaseFirestore.instance
+                                          .collection('Courses')
+                                          .doc(widget.data.id)
+                                          .update({
+                                        'students': FieldValue.arrayUnion(
+                                            [data.docs[i].id]),
+                                        'studentDetails': FieldValue.arrayUnion(
+                                            [data.docs[i].data()])
+                                      });
+
+                                      await FirebaseFirestore.instance
+                                          .collection('Students')
+                                          .doc(data.docs[i].id)
+                                          .update({
+                                        'class': FieldValue.arrayUnion(
+                                            [widget.data.id]),
+                                      });
+                                    } else {
+                                      print('2');
+                                      await FirebaseFirestore.instance
+                                          .collection('Courses')
+                                          .doc(widget.data.id)
+                                          .update({
+                                        'students': FieldValue.arrayRemove(
+                                            [data.docs[i].id]),
+                                        'studentDetails':
+                                            FieldValue.arrayRemove(
+                                                [data.docs[i].data()])
+                                      });
+                                      await FirebaseFirestore.instance
+                                          .collection('Students')
+                                          .doc(data.docs[i].id)
+                                          .update({
+                                        'class': FieldValue.arrayRemove(
+                                            [widget.data.id]),
+                                      });
+                                    }
+                                  },
+                                );
+                              }),
+                            ],
+                          ),
+                        );
+                      }),
+                    const SizedBox(
+                      height: 20,
                     ),
                   ],
-                ),
-                const Expanded(
-                  child: SizedBox(
-                    width: 20,
-                  ),
-                ),
-                Checkbox(
-                  value: true,
-                  onChanged: (value) {},
-                ),
-              ],
-            ),
-          ),
-        const SizedBox(
-          height: 20,
-        ),
-      ],
-    ));
+                ));
+              });
+        });
   }
 }

@@ -13,6 +13,12 @@ Future addCourse(name, section, semester, days, timefrom, timeto) async {
     'timeto': timeto,
     'dateTime': DateTime.now(),
     'uid': FirebaseAuth.instance.currentUser!.uid,
+    'students': [],
+    'studentDetails': [],
+    'present': [],
+    'late': [],
+    'absent': [],
+    'excuse': [],
   };
 
   await docUser.set(json);

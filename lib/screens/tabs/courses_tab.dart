@@ -3,9 +3,11 @@ import 'package:atieed/screens/tabs/courses_pages/add_course_page.dart';
 import 'package:atieed/screens/tabs/courses_pages/class_started_page.dart';
 import 'package:atieed/screens/tabs/courses_pages/open_record_page.dart';
 import 'package:atieed/screens/tabs/courses_pages/students_page.dart';
+import 'package:atieed/utlis/app_constants.dart';
 import 'package:atieed/utlis/colors.dart';
 import 'package:atieed/widgets/button_widget.dart';
 import 'package:atieed/widgets/text_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,159 +30,185 @@ class _CourseTabState extends State<CourseTab> {
     );
   }
 
+  dynamic courseData = {};
+
   Widget mainWidget() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              TextWidget(
-                text: 'Your Courses',
-                fontSize: 24,
-                fontFamily: 'Bold',
-              ),
-              const Expanded(
-                child: SizedBox(),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.notifications_none_rounded,
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ProfileScreen()));
-                },
-                child: const CircleAvatar(
-                  minRadius: 15,
-                  maxRadius: 15,
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person),
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: ButtonWidget(
-              fontSize: 18,
-              width: 200,
-              label: 'Add Course',
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AddCoursePage()));
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          for (int i = 0; i < 3; i++)
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isclicked = true;
-                  });
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 175,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Colors.black,
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('Courses')
+            .where('uid', isEqualTo: userId)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+            return const Center(child: Text('Error'));
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: Center(
+                  child: CircularProgressIndicator(
+                color: Colors.black,
+              )),
+            );
+          }
+
+          final data = snapshot.requireData;
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    TextWidget(
+                      text: 'Your Courses',
+                      fontSize: 24,
+                      fontFamily: 'Bold',
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const Expanded(
-                              child: SizedBox(
-                                width: 20,
-                              ),
-                            ),
-                            Container(
-                              width: 100,
-                              height: 25,
-                              decoration: BoxDecoration(
-                                color: primary,
-                                borderRadius: BorderRadius.circular(
-                                  20,
-                                ),
-                              ),
-                              child: Center(
-                                child: TextWidget(
-                                  text: 'In Progress',
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontFamily: 'Medium',
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.info,
-                              ),
-                            ),
-                          ],
-                        ),
-                        TextWidget(
-                          text: '1st Semester',
-                          fontSize: 12,
-                        ),
-                        TextWidget(
-                          align: TextAlign.start,
-                          maxLines: 2,
-                          text: 'Contemporary Philippine Arts from the Regions',
-                          fontSize: 18,
-                          fontFamily: 'Bold',
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextWidget(
-                              text: '12STEMA2',
-                              fontSize: 12,
-                            ),
-                            TextWidget(
-                              text: 'First Semester SY 2023-2024 (SHS)',
-                              fontSize: 12,
-                            ),
-                          ],
-                        ),
-                      ],
+                    const Expanded(
+                      child: SizedBox(),
                     ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.notifications_none_rounded,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const ProfileScreen()));
+                      },
+                      child: const CircleAvatar(
+                        minRadius: 15,
+                        maxRadius: 15,
+                        backgroundColor: Colors.grey,
+                        child: Icon(Icons.person),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: ButtonWidget(
+                    fontSize: 18,
+                    width: 200,
+                    label: 'Add Course',
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const AddCoursePage()));
+                    },
                   ),
                 ),
-              ),
+                const SizedBox(
+                  height: 20,
+                ),
+                for (int i = 0; i < data.docs.length; i++)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          courseData = data.docs[i];
+                          isclicked = true;
+                        });
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 175,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  const Expanded(
+                                    child: SizedBox(
+                                      width: 20,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      color: primary,
+                                      borderRadius: BorderRadius.circular(
+                                        20,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: TextWidget(
+                                        text: 'In Progress',
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontFamily: 'Medium',
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.info,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              TextWidget(
+                                text: data.docs[i]['semester'],
+                                fontSize: 12,
+                              ),
+                              TextWidget(
+                                align: TextAlign.start,
+                                maxLines: 2,
+                                text: data.docs[i]['name'],
+                                fontSize: 18,
+                                fontFamily: 'Bold',
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextWidget(
+                                    text: data.docs[i]['section'],
+                                    fontSize: 12,
+                                  ),
+                                  TextWidget(
+                                    text: 'First Semester SY 2023-2024 (SHS)',
+                                    fontSize: 12,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
-        ],
-      ),
-    );
+          );
+        });
   }
 
   Widget courseWidget() {
@@ -285,7 +313,7 @@ class _CourseTabState extends State<CourseTab> {
                   height: 20,
                 ),
                 TextWidget(
-                  text: '1st Semester',
+                  text: courseData['semester'],
                   fontSize: 18,
                   fontFamily: 'Medium',
                 ),
@@ -294,7 +322,7 @@ class _CourseTabState extends State<CourseTab> {
                 ),
                 TextWidget(
                   maxLines: 2,
-                  text: 'Contemporary Philippine Arts from the Regions',
+                  text: courseData['name'],
                   fontSize: 28,
                   fontFamily: 'Bold',
                 ),
@@ -303,69 +331,30 @@ class _CourseTabState extends State<CourseTab> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Wrap(
                     children: [
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(
-                            20,
+                      for (int i = 0; i < courseData['days'].length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5, right: 5),
+                          child: Container(
+                            width: 100,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(
+                                20,
+                              ),
+                            ),
+                            child: Center(
+                              child: TextWidget(
+                                text: courseData['days'][i],
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontFamily: 'Medium',
+                              ),
+                            ),
                           ),
                         ),
-                        child: Center(
-                          child: TextWidget(
-                            text: 'Tue',
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontFamily: 'Medium',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(
-                            20,
-                          ),
-                        ),
-                        child: Center(
-                          child: TextWidget(
-                            text: 'Wed',
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontFamily: 'Medium',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(
-                            20,
-                          ),
-                        ),
-                        child: Center(
-                          child: TextWidget(
-                            text: 'Thu',
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontFamily: 'Medium',
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -376,7 +365,7 @@ class _CourseTabState extends State<CourseTab> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      width: 115,
+                      width: 125,
                       height: 30,
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -388,7 +377,8 @@ class _CourseTabState extends State<CourseTab> {
                       ),
                       child: Center(
                         child: TextWidget(
-                          text: '6:00 - 7:00',
+                          text:
+                              '${courseData['timefrom']} - ${courseData['timeto']}',
                           fontSize: 12,
                           color: Colors.black,
                           fontFamily: 'Medium',
@@ -408,7 +398,7 @@ class _CourseTabState extends State<CourseTab> {
                       ),
                       child: Center(
                         child: TextWidget(
-                          text: '12STEMA2',
+                          text: courseData['section'],
                           fontSize: 12,
                           color: Colors.black,
                           fontFamily: 'Medium',
@@ -669,7 +659,7 @@ class _CourseTabState extends State<CourseTab> {
                     ],
                   ),
                 ),
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 1; i++)
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: Container(
@@ -1013,8 +1003,13 @@ class _CourseTabState extends State<CourseTab> {
                         ),
                         child: TextButton.icon(
                           onPressed: () {
+                            setState(() {
+                              isclicked = false;
+                            });
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const StudentsPage()));
+                                builder: (context) => StudentsPage(
+                                      data: courseData,
+                                    )));
                           },
                           icon: const Icon(
                             Icons.edit,
@@ -1031,17 +1026,18 @@ class _CourseTabState extends State<CourseTab> {
                     ],
                   ),
                 ),
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < courseData['students'].length; i++)
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           minRadius: 30,
                           maxRadius: 30,
-                          child: Icon(Icons.person),
+                          backgroundImage: NetworkImage(
+                              courseData['studentDetails'][i]['img']),
                         ),
                         const SizedBox(
                           width: 20,
@@ -1051,13 +1047,14 @@ class _CourseTabState extends State<CourseTab> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextWidget(
-                              text: 'Surname, First Name',
+                              text: courseData['studentDetails'][i]['name'],
                               fontSize: 16,
                               fontFamily: 'Bold',
                               color: Colors.black,
                             ),
                             TextWidget(
-                              text: 'Grade Level          Section',
+                              text:
+                                  '${courseData['studentDetails'][i]['gradelevel']}         ${courseData['studentDetails'][i]['section']}',
                               fontSize: 12,
                               fontFamily: 'Medium',
                               color: Colors.black,
