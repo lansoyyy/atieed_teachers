@@ -8,7 +8,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRPage extends StatelessWidget {
-  const QRPage({super.key});
+  dynamic data;
+
+  QRPage({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class QRPage extends StatelessWidget {
                       height: 20,
                     ),
                     TextWidget(
-                      text: '1st Semester',
+                      text: data['semester'],
                       fontSize: 18,
                       fontFamily: 'Medium',
                     ),
@@ -88,7 +90,7 @@ class QRPage extends StatelessWidget {
                     ),
                     TextWidget(
                       maxLines: 2,
-                      text: 'Contemporary Philippine Arts from the Regions',
+                      text: data['name'],
                       fontSize: 28,
                       fontFamily: 'Bold',
                     ),
@@ -129,7 +131,7 @@ class QRPage extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Center(child: QrImageView(data: '123')),
+                          child: Center(child: QrImageView(data: data.id)),
                         ),
                       ),
                     ),

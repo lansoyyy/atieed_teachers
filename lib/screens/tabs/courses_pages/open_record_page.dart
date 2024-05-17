@@ -5,9 +5,12 @@ import 'package:atieed/widgets/text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class OpenRecordPage extends StatefulWidget {
-  const OpenRecordPage({super.key});
+  dynamic data;
+
+  OpenRecordPage({super.key, required this.data});
 
   @override
   State<OpenRecordPage> createState() => _OpenRecordPageState();
@@ -122,7 +125,8 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                         ),
                         child: Center(
                           child: TextWidget(
-                            text: 'November',
+                            text: DateFormat.MMM()
+                                .format(widget.data['dateTime'].toDate()),
                             fontSize: 12,
                             color: Colors.black,
                             fontFamily: 'Medium',
@@ -134,25 +138,19 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                           width: 20,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.delete_outline,
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   TextWidget(
-                    text: '1st Semester',
+                    text: widget.data['semester'],
                     fontSize: 12,
                   ),
                   TextWidget(
                     align: TextAlign.start,
                     maxLines: 2,
-                    text: 'Contemporary Philippine Arts from the Regions',
+                    text: widget.data['name'],
                     fontSize: 18,
                     fontFamily: 'Bold',
                   ),
@@ -163,27 +161,7 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        width: 115,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            20,
-                          ),
-                        ),
-                        child: Center(
-                          child: TextWidget(
-                            text: 'November',
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontFamily: 'Medium',
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 115,
+                        width: 125,
                         height: 30,
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -195,7 +173,8 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                         ),
                         child: Center(
                           child: TextWidget(
-                            text: '6:00 - 7:00',
+                            text:
+                                '${widget.data['timefrom']} - ${widget.data['timeto']}',
                             fontSize: 12,
                             color: Colors.black,
                             fontFamily: 'Medium',
@@ -203,7 +182,7 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                         ),
                       ),
                       Container(
-                        width: 115,
+                        width: 125,
                         height: 30,
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -215,7 +194,7 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                         ),
                         child: Center(
                           child: TextWidget(
-                            text: '12STEMA2',
+                            text: widget.data['section'],
                             fontSize: 12,
                             color: Colors.black,
                             fontFamily: 'Medium',
@@ -243,7 +222,7 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                           ),
                           child: Center(
                             child: TextWidget(
-                              text: '00',
+                              text: widget.data['presents'].length.toString(),
                               fontSize: 12,
                               color: Colors.white,
                               fontFamily: 'Medium',
@@ -273,7 +252,9 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                           ),
                           child: Center(
                             child: TextWidget(
-                              text: '00',
+                              text: (widget.data['students'].length -
+                                      widget.data['presents'].length)
+                                  .toString(),
                               fontSize: 12,
                               color: Colors.white,
                               fontFamily: 'Medium',
@@ -401,187 +382,104 @@ class _OpenRecordPageState extends State<OpenRecordPage> {
                 fontSize: 12,
                 fontFamily: 'Regular',
               ),
-              TextWidget(
-                text: 'Time in        Time out',
-                fontSize: 12,
-                fontFamily: 'Regular',
-              ),
             ],
           ),
         ),
-        Container(
-          width: double.infinity,
-          height: 225,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: Colors.black,
+        for (int i = 0; i < widget.data['students'].length; i++)
+          Container(
+            width: double.infinity,
+            height: 120,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.black,
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const CircleAvatar(
-                      minRadius: 25,
-                      maxRadius: 25,
-                      child: Icon(Icons.person),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextWidget(
-                          text: 'Surname, First Name',
-                          fontSize: 16,
-                          fontFamily: 'Bold',
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: 125,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: green,
-                            borderRadius: BorderRadius.circular(
-                              15,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const CircleAvatar(
+                        minRadius: 25,
+                        maxRadius: 25,
+                        child: Icon(Icons.person),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          TextWidget(
+                            text: widget.data['name'],
+                            fontSize: 16,
+                            fontFamily: 'Bold',
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: 125,
+                            height: 35,
+                            decoration: BoxDecoration(
+                              color: widget.data['presents']
+                                      .contains(widget.data.id)
+                                  ? green
+                                  : Colors.red,
+                              borderRadius: BorderRadius.circular(
+                                15,
+                              ),
+                            ),
+                            child: Center(
+                              child: TextWidget(
+                                text: widget.data['presents']
+                                        .contains(widget.data.id)
+                                    ? 'Present'
+                                    : 'Absent',
+                                fontSize: 14,
+                                color: Colors.white,
+                                fontFamily: 'Medium',
+                              ),
                             ),
                           ),
-                          child: Center(
-                            child: TextWidget(
-                              text: 'Present',
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontFamily: 'Medium',
-                            ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        width: 100,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(
+                            20,
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 100,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(
-                          20,
+                        child: Center(
+                          child: TextWidget(
+                            text: DateFormat('hh:mm a').format(DateTime.now()),
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontFamily: 'Medium',
+                          ),
                         ),
                       ),
-                      child: Center(
-                        child: TextWidget(
-                          text: '10:55 am',
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontFamily: 'Medium',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      width: 125,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: green,
-                        borderRadius: BorderRadius.circular(
-                          15,
-                        ),
-                      ),
-                      child: Center(
-                        child: TextWidget(
-                          text: 'Mark as Present',
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontFamily: 'Medium',
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 125,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: red,
-                        borderRadius: BorderRadius.circular(
-                          15,
-                        ),
-                      ),
-                      child: Center(
-                        child: TextWidget(
-                          text: 'Mark as Absent',
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontFamily: 'Medium',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      width: 125,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(
-                          15,
-                        ),
-                      ),
-                      child: Center(
-                        child: TextWidget(
-                          text: 'Mark as Excuse',
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontFamily: 'Medium',
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 125,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(
-                          15,
-                        ),
-                      ),
-                      child: Center(
-                        child: TextWidget(
-                          text: 'Mark as Late',
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontFamily: 'Medium',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
         const SizedBox(
           height: 20,
         ),

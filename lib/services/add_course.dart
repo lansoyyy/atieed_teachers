@@ -19,6 +19,8 @@ Future addCourse(name, section, semester, days, timefrom, timeto) async {
     'late': [],
     'absent': [],
     'excuse': [],
+    'presents': [],
+    'hasStarted': false,
   };
 
   await docUser.set(json);

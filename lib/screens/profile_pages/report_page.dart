@@ -2,6 +2,7 @@ import 'package:atieed/utlis/colors.dart';
 import 'package:atieed/widgets/button_widget.dart';
 import 'package:atieed/widgets/text_widget.dart';
 import 'package:atieed/widgets/textfield_widget.dart';
+import 'package:atieed/widgets/toast_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -99,7 +100,11 @@ class _ReportPageState extends State<ReportPage> {
                 ),
                 ButtonWidget(
                   label: 'Send',
-                  onPressed: () {},
+                  onPressed: () {
+                    showToast('Report successfully sent!');
+
+                    Navigator.of(context).pop();
+                  },
                 ),
                 const SizedBox(
                   height: 50,

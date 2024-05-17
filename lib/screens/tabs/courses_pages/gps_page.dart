@@ -7,7 +7,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class GPSPage extends StatelessWidget {
-  const GPSPage({super.key});
+  dynamic data;
+
+  GPSPage({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class GPSPage extends StatelessWidget {
                       height: 20,
                     ),
                     TextWidget(
-                      text: '1st Semester',
+                      text: data['semester'],
                       fontSize: 18,
                       fontFamily: 'Medium',
                     ),
@@ -87,7 +89,7 @@ class GPSPage extends StatelessWidget {
                     ),
                     TextWidget(
                       maxLines: 2,
-                      text: 'Contemporary Philippine Arts from the Regions',
+                      text: data['name'],
                       fontSize: 28,
                       fontFamily: 'Bold',
                     ),
