@@ -221,13 +221,6 @@ class AttendanceTab extends StatelessWidget {
                                   fontSize: 22,
                                   fontFamily: 'Bold',
                                 ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.filter_list,
-                                    color: Colors.black,
-                                  ),
-                                ),
                               ],
                             ),
                           ),

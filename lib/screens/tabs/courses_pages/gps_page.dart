@@ -131,7 +131,7 @@ class GPSPage extends StatelessWidget {
                         child: FlutterMap(
                           options: const MapOptions(
                             zoom: 18,
-                            center: LatLng(14.110739, 121.550554),
+                            center: LatLng(14.652386, 121.060551),
                             minZoom: 1,
                             maxZoom: 18,
                           ),
