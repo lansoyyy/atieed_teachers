@@ -70,12 +70,12 @@ class _CourseTabState extends State<CourseTab> {
                     const Expanded(
                       child: SizedBox(),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.notifications_none_rounded,
-                      ),
-                    ),
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: const Icon(
+                    //     Icons.notifications_none_rounded,
+                    //   ),
+                    // ),
                     const SizedBox(
                       width: 10,
                     ),
@@ -238,12 +238,12 @@ class _CourseTabState extends State<CourseTab> {
               const Expanded(
                 child: SizedBox(),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.notifications_none_rounded,
-                ),
-              ),
+              // IconButton(
+              //   onPressed: () {},
+              //   icon: const Icon(
+              //     Icons.notifications_none_rounded,
+              //   ),
+              // ),
               const SizedBox(
                 width: 10,
               ),

@@ -76,12 +76,12 @@ class AttendanceTab extends StatelessWidget {
                               const Expanded(
                                 child: SizedBox(),
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.notifications_none_rounded,
-                                ),
-                              ),
+                              // IconButton(
+                              //   onPressed: () {},
+                              //   icon: const Icon(
+                              //     Icons.notifications_none_rounded,
+                              //   ),
+                              // ),
                               const SizedBox(
                                 width: 10,
                               ),
