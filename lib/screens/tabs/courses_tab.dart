@@ -113,99 +113,121 @@ class _CourseTabState extends State<CourseTab> {
                 const SizedBox(
                   height: 20,
                 ),
-                for (int i = 0; i < data.docs.length; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          courseData = data.docs[i];
-                          isclicked = true;
-                        });
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 175,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.black,
+                data.docs.isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 100),
+                        child: Center(
+                          child: TextWidget(
+                            text: 'Your courses is empty.',
+                            fontSize: 14,
+                            color: Colors.grey,
+                            fontFamily: 'Medium',
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  const Expanded(
-                                    child: SizedBox(
-                                      width: 20,
+                      )
+                    : Column(
+                        children: [
+                          for (int i = 0; i < data.docs.length; i++)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    courseData = data.docs[i];
+                                    isclicked = true;
+                                  });
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 175,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: Colors.black,
                                     ),
                                   ),
-                                  Container(
-                                    width: 100,
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                      color: primary,
-                                      borderRadius: BorderRadius.circular(
-                                        20,
-                                      ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            const Expanded(
+                                              child: SizedBox(
+                                                width: 20,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 100,
+                                              height: 25,
+                                              decoration: BoxDecoration(
+                                                color: primary,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  20,
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: TextWidget(
+                                                  text: 'In Progress',
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontFamily: 'Medium',
+                                                ),
+                                              ),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: const Icon(
+                                                Icons.info,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        TextWidget(
+                                          text: data.docs[i]['semester'],
+                                          fontSize: 12,
+                                        ),
+                                        TextWidget(
+                                          align: TextAlign.start,
+                                          maxLines: 2,
+                                          text: data.docs[i]['name'],
+                                          fontSize: 18,
+                                          fontFamily: 'Bold',
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            TextWidget(
+                                              text: data.docs[i]['section'],
+                                              fontSize: 12,
+                                            ),
+                                            TextWidget(
+                                              text:
+                                                  'First Semester SY 2023-2024 (SHS)',
+                                              fontSize: 12,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    child: Center(
-                                      child: TextWidget(
-                                        text: 'In Progress',
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                        fontFamily: 'Medium',
-                                      ),
-                                    ),
                                   ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.info,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                              TextWidget(
-                                text: data.docs[i]['semester'],
-                                fontSize: 12,
-                              ),
-                              TextWidget(
-                                align: TextAlign.start,
-                                maxLines: 2,
-                                text: data.docs[i]['name'],
-                                fontSize: 18,
-                                fontFamily: 'Bold',
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextWidget(
-                                    text: data.docs[i]['section'],
-                                    fontSize: 12,
-                                  ),
-                                  TextWidget(
-                                    text: 'First Semester SY 2023-2024 (SHS)',
-                                    fontSize: 12,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                            ),
+                        ],
                       ),
-                    ),
-                  ),
               ],
             ),
           );
